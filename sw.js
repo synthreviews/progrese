@@ -9,7 +9,7 @@
    - Cesty jsou relativní ke scope '/progrese/' (viz umístění sw.js), aby
      se tenhle SW nikdy nehádal s jinou appkou na jiné cestě téhož originu.
 */
-const CACHE_VERSION = 'progrese-v2';
+const CACHE_VERSION = 'progrese-v3';
 
 const APP_SHELL = [
   '/progrese/',
