@@ -35,19 +35,19 @@
 <meta name="twitter:image" content="https://synthlucida.com/progrese-og.png">
 
 <!-- ===== Favicon ===== -->
-<link rel="icon" href="/progrese-favicon.ico" sizes="any">
-<link rel="icon" href="/progrese-favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/progrese-apple-touch-icon.png">
+<link rel="icon" href="/progrese/progrese-favicon.ico" sizes="any">
+<link rel="icon" href="/progrese/progrese-favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/progrese/progrese-apple-touch-icon.png">
 
 <!-- ===== PWA manifest (shared with synthlucida.com / player.html) ===== -->
-<link rel="manifest" href="/manifest-progrese-cz.json">
+<link rel="manifest" href="/progrese/manifest-progrese-cz.json">
 <script>
   // Registrace service workeru pro PWA (offline běh + instalace, mj. do
   // Microsoft Storu přes PWABuilder). Odloženo na 'load', ať nesoutěží
   // o šířku pásma s vlastním obsahem stránky při prvním načtení.
   if('serviceWorker' in navigator){
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').catch(err => console.warn('SW registrace selhala', err));
+      navigator.serviceWorker.register('/progrese/sw.js').catch(err => console.warn('SW registrace selhala', err));
     });
   }
 </script>

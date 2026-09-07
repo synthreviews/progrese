@@ -6,26 +6,30 @@
      zbytečné je pořád stahovat znovu.
    - Verze cache (CACHE_VERSION) se zvedne při každé větší změně app shellu;
      activate pak smaže staré verze, aby se cache nehromadila donekonečna.
+   - Cesty jsou relativní ke scope '/progrese/' (viz umístění sw.js), aby
+     se tenhle SW nikdy nehádal s jinou appkou na jiné cestě téhož originu.
 */
 const CACHE_VERSION = 'progrese-v1';
 
 const APP_SHELL = [
-  '/progrese-en.html',
-  '/progrese-cz.html',
-  '/manifest-progrese-en.json',
-  '/manifest-progrese-cz.json',
-  '/progrese-favicon.ico',
-  '/progrese-favicon.svg',
-  '/progrese-apple-touch-icon.png',
-  '/progrese-icon-96.png',
-  '/progrese-icon-128.png',
-  '/progrese-icon-144.png',
-  '/progrese-icon-192.png',
-  '/progrese-icon-256.png',
-  '/progrese-icon-384.png',
-  '/progrese-icon-512.png',
-  '/progrese-icon-192-maskable.png',
-  '/progrese-icon-512-maskable.png',
+  '/progrese/',
+  '/progrese/index.html',
+  '/progrese/progrese-en.html',
+  '/progrese/progrese-cz.html',
+  '/progrese/manifest-progrese-en.json',
+  '/progrese/manifest-progrese-cz.json',
+  '/progrese/progrese-favicon.ico',
+  '/progrese/progrese-favicon.svg',
+  '/progrese/progrese-apple-touch-icon.png',
+  '/progrese/progrese-icon-96.png',
+  '/progrese/progrese-icon-128.png',
+  '/progrese/progrese-icon-144.png',
+  '/progrese/progrese-icon-192.png',
+  '/progrese/progrese-icon-256.png',
+  '/progrese/progrese-icon-384.png',
+  '/progrese/progrese-icon-512.png',
+  '/progrese/progrese-icon-192-maskable.png',
+  '/progrese/progrese-icon-512-maskable.png',
   'https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js',
   'https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js'
 ];
@@ -75,7 +79,7 @@ async function networkFirst(req) {
   } catch (err) {
     const cached = await caches.match(req);
     if (cached) return cached;
-    const fallback = await caches.match('/progrese-en.html');
+    const fallback = await caches.match('/progrese/progrese-en.html');
     return fallback || new Response(
       'Offline a tahle stránka ještě není uložená v cache.',
       { status: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' } }

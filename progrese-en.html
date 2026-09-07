@@ -35,12 +35,12 @@
 <meta name="twitter:image" content="https://synthlucida.com/progrese-og.png">
 
 <!-- ===== Favicon ===== -->
-<link rel="icon" href="/progrese-favicon.ico" sizes="any">
-<link rel="icon" href="/progrese-favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/progrese-apple-touch-icon.png">
+<link rel="icon" href="/progrese/progrese-favicon.ico" sizes="any">
+<link rel="icon" href="/progrese/progrese-favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/progrese/progrese-apple-touch-icon.png">
 
 <!-- ===== PWA manifest (shared with synthlucida.com / player.html) ===== -->
-<link rel="manifest" href="/manifest-progrese-en.json">
+<link rel="manifest" href="/progrese/manifest-progrese-en.json">
 <script>
   // Register the service worker for the PWA (offline support + installability,
   // including submission to the Microsoft Store via PWABuilder). Deferred to
@@ -48,7 +48,7 @@
   // on first load.
   if('serviceWorker' in navigator){
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').catch(err => console.warn('SW registration failed', err));
+      navigator.serviceWorker.register('/progrese/sw.js').catch(err => console.warn('SW registration failed', err));
     });
   }
 </script>

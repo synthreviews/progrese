@@ -1,16 +1,16 @@
 {
-  "id": "/progrese-cz.html",
+  "id": "/progrese/progrese-cz.html",
   "name": "Progrese — Chord Generator",
   "short_name": "Progrese",
-  "start_url": "/progrese-cz.html",
-  "scope": "/progrese-cz.html",
+  "start_url": "/progrese/progrese-cz.html",
+  "scope": "/progrese/",
   "display": "standalone",
   "background_color": "#141210",
   "theme_color": "#141210",
   "orientation": "portrait",
   "icons": [
-    { "src": "/progrese-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "/progrese-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "/progrese-icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    { "src": "/progrese/progrese-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/progrese/progrese-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/progrese/progrese-icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }
