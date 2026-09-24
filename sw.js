@@ -3,13 +3,17 @@
      nejčerstvější verze, offline naskočí poslední uložená verze z cache.
    - "cache-first" pro statické soubory (ikony, manifesty, VexFlow/jsPDF
      z CDN) — jsou to věci, co se nemění při každém deployi, takže je
-     zbytečné je pořád stahovat znovu.
+     zbytečné je pořád stahovat znovu. VexFlow/jsPDF stránka načítá až při
+     exportu not do PDF, ale přednačítají se sem, aby PDF šlo i offline.
+   - HTML se ukládá pod adresou BEZ parametrů (?r=…&v=… ze sdílecího
+     odkazu), takže každý otevřený sdílený postup nepřidá do cache další
+     kopii stránky a sdílený odkaz jde otevřít i offline.
    - Verze cache (CACHE_VERSION) se zvedne při každé větší změně app shellu;
      activate pak smaže staré verze, aby se cache nehromadila donekonečna.
    - Cesty jsou relativní ke scope '/progrese/' (viz umístění sw.js), aby
      se tenhle SW nikdy nehádal s jinou appkou na jiné cestě téhož originu.
 */
-const CACHE_VERSION = 'progrese-v7';
+const CACHE_VERSION = 'progrese-v8';
 
 const APP_SHELL = [
   '/progrese/',
@@ -71,15 +75,22 @@ self.addEventListener('fetch', (event) => {
 });
 
 async function networkFirst(req) {
+  const url = new URL(req.url);
+  const pageKey = url.origin + url.pathname; // bez ?query — viz komentář nahoře
   try {
     const fresh = await fetch(req);
-    const cache = await caches.open(CACHE_VERSION);
-    cache.put(req, fresh.clone());
+    // ukládat jen skutečně fungující stránku (ne 404/500 ani přesměrování),
+    // jinak by offline místo appky naskočila chybová stránka
+    if (fresh && fresh.ok && !fresh.redirected) {
+      const cache = await caches.open(CACHE_VERSION);
+      cache.put(pageKey, fresh.clone());
+    }
     return fresh;
   } catch (err) {
-    const cached = await caches.match(req);
+    const cached = (await caches.match(pageKey)) || (await caches.match(req, { ignoreSearch: true }));
     if (cached) return cached;
-    const fallback = await caches.match('/progrese/progrese-en.html');
+    const fallbackPage = url.pathname.includes('-cz') ? '/progrese/progrese-cz.html' : '/progrese/progrese-en.html';
+    const fallback = await caches.match(fallbackPage);
     return fallback || new Response(
       'Offline a tahle stránka ještě není uložená v cache.',
       { status: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' } }
